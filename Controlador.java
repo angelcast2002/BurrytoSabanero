@@ -32,7 +32,7 @@ public class Controlador {
                 
             default:
             
-                mensaje = "\n\nNo trolee perro";
+                mensaje = "\n\nElija una opcion correcta";
                 break;
                 
             } 
@@ -59,7 +59,7 @@ public class Controlador {
 
             default:
             
-                mensaje = "\n\nNo trolee perro";
+                mensaje = "\n\nElija una opcion correcta";
                 break;
                 
             }
@@ -87,7 +87,7 @@ public class Controlador {
 
             default:
             
-                mensaje = "\n\nNo trolee perro";
+                mensaje = "\n\nElija una opcion correcta";
                 break;
                 
             }
