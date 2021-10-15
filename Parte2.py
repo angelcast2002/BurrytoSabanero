@@ -1,9 +1,13 @@
 import tkinter as Tk
-from parte3 import *
-from imagenes import *
+from Parte3 import Parte3
 from Interfaz import Interfaz
 
 class Parte2:
+    
+
+    def __init__(self):
+        self.interfaz = Interfaz()
+        self.parte3 = Parte3()
     
     def Navegar_en_el_mapa(self,direcciones): #Esta función es la pantalla del mapa que se presentó en el prototipo anterior
         opcion = "0"
@@ -38,12 +42,12 @@ class Parte2:
 
             if opcion == "2":#Esta opcion lo manda a la pantalla de ingresar destino
                 # ingresar_destino(direcciones)
-                navegarmapa(direcciones) 
+                self.parte3.navegarmapa(direcciones) 
 
             elif opcion == "3":#Esta opcion le muestra que significan los iconos en la pantalla
                 #La clave se esta ejemplificando de forma solo textual
                 #Es por eso que solo se puso como se ve el icono y no la imagen como tal. 
-                print(informacion())
+                self.interfaz.informacion()
                 print(''' 
         ---------------------------------------------------------------------
         -                                                                   -

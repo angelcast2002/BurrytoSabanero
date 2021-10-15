@@ -1,33 +1,31 @@
-from Clases.Parte2 import Parte2
-from Clases.Estadisticas import Estadisticas
+from Parte2 import Parte2
+from Estadisticas import Estadisticas
 from Interfaz import Interfaz
 import pandas as pd
+import time
 
 
 class Controlador:
 
-    vista = False
-    interfaz = False
-    estadisticas = False
-    parte2 = False
-
-    estado_sesion = {
-    'nombre_usuario': '',
-    'clave': '', 
-    'direccion_actual': '',
-    'estado': False
-    }
-
-    direcciones = {}
-
-    #Almacenamos en una variable lo que contiene nuestro archivo.csv
-    registrodata = pd.read_csv("Estado_Sesion.csv")
-
     def __init__(self,vista):
         self.vista = vista
-        self.interfaz = Interfaz
-        self.estadisticas = Estadisticas
-        self.parte2 = Parte2
+        self.interfaz = Interfaz()
+        self.estadisticas = Estadisticas()
+        self.parte2 = Parte2()
+
+        self.estado_sesion = {
+        'nombre_usuario': '',
+        'clave': '', 
+        'direccion_actual': '',
+        'estado': False
+        }
+
+        self.direcciones = {}
+        
+
+    #Almacenamos en una variable lo que contiene nuestro archivo.csv
+        self.registrodata = pd.read_csv("Estado_Sesion.csv")
+
         
     def main(self):
         #Almacena y muestra una imagen del menú.
@@ -82,14 +80,14 @@ class Controlador:
                 
     def registrarse(self):
         #Este apartado almacena y muestra una imagen del apartado de registro.
-        self.interfaz.registrarse()
+        self.interfaz.registrar()
         contador = 1
         nombre_usuario = (input('Ingrese su nombre de usuario:  ')).lower()
         clave = (input('Ingrese su clave: ')).lower()
 
         #ACTUALIZACIÖN
         #Se verificará que no existe un usuario ya registrado con el nombre anteriormente escrito.
-        usuario_repetido=self.self.registrodata[self.self.registrodata['usuarios']==nombre_usuario]['usuarios']
+        usuario_repetido=self.registrodata[self.registrodata['usuarios']==nombre_usuario]['usuarios']
         #Se contará el número de usuarios que aparecen en la lista para observar si no existe algún usuario repetido. 
         repetido=len(usuario_repetido)
         #Con esto se determinará el número de veces que se encuentra el usuario repetido y devolverá un mensaje indicado lo sucedido. 
@@ -105,7 +103,7 @@ class Controlador:
         else:
             #ACTUALIZACIÓN+
             #Con esto re recorren todos los datos que se encuentran en la lista para que el contador almacene el número de valores. 
-            for posicion in list(self.self.registrodata.index):
+            for posicion in list(self.registrodata.index):
                 contador=contador+1
             #Almacenamos los datos que el usuario ingresó. 
             self.registrodata.loc[contador, 'usuarios']=nombre_usuario
@@ -134,7 +132,7 @@ class Controlador:
              existe=False
              nombre_usuario = (input('Ingrese su nombre de usuario:  ')).lower()
              #x=str(self.registrodata[self.registrodata['usuarios']==nombre_usuario]['contrasenas'])
-             usuarios=list(self.self.registrodata['usuarios'])
+             usuarios=list(self.registrodata['usuarios'])
              clave = (input('Ingrese su clave:  ')).lower()
              posicon=0
              for i in usuarios:
@@ -167,7 +165,7 @@ class Controlador:
                          self.registrodata.loc[self.registrodata['usuarios']==nombre_usuario,'direccion']=ubicacion
                          #Se determina el número de veces que el usuario ingresa a la aplicación. 
                          conteo_ingresos= self.registrodata[self.registrodata['usuarios']==nombre_usuario]['ingresos a la aplicacion']
-                         input()
+                         
                          #Se actualiza el DataFrame. 
                          self.registrodata.loc[self.registrodata['usuarios']==nombre_usuario,'ingresos a la aplicacion']= int(conteo_ingresos)+1
                      #Se guarda el DataFrame.
@@ -199,7 +197,7 @@ class Controlador:
 
     def main2(self, posicon, nombre): #Esta función despliega el menú secundario.
         #Esta acción empieza el contador con el tiempo. 
-        starting_point = self.time.time()
+        starting_point = time.time()
         #Esta variable nos permite salir del ciclo. 
         estado = True
         #Se crea un ciclo que despliega las opciones del menú y lo reinicia cuando encuentra un error en los datos introducidos. 
@@ -220,7 +218,7 @@ class Controlador:
                 #Establecemos el estado de la sesión como inactiva. 
                 self.estado_sesion['estado'] = False
                 #Guarda el tiempo que se ha transcurrido desde que se empezó a contar. 
-                tiempo_transcurrido = int(self.time.time () - starting_point)
+                tiempo_transcurrido = int(time.time() - starting_point)
                 #Se guarda el tiempo transcurrido en la persona que ha iniciado sesión. 
                 registro_tempo= self.registrodata.loc[self.registrodata['usuarios']==nombre,'tiempo pasado en la app']
                 #Se actualiza el valor del tiempo. 

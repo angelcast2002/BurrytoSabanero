@@ -2,10 +2,12 @@ import tkinter as Tk
 import pandas as pd
 import numpy as np
 from tkinter import*
-from imagenes import *
+from Interfaz import Interfaz
 import matplotlib.pyplot as plt
 
 class Estadisticas:
+    def __init__(self):
+        self.interfaz = Interfaz()
 
     #Esta función realiza un cálculo del promedio del tiempo y de los ingresos.
     def promedio(self, data, funcion):

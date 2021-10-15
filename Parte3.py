@@ -1,18 +1,22 @@
 from Vista import Vista
 import tkinter as Tk
-from parte4 import*
-from imagenes import * 
+from Parte4 import Parte4
+from Interfaz import Interfaz
 import requests
 import json
 import pandas as pd
-from Estadisticas import*
+from Estadisticas import Estadisticas
 
 
 class Parte3:
 
-    vista = Vista()
-    
-    rutas=pd.read_csv('rutas.csv')
+    def __init__(self):
+        self.vista = Vista()
+        self.interfaz = Interfaz()
+        self.parte4 = Parte4()
+        self.estadisticas = Estadisticas()
+        self.rutas=pd.read_csv('rutas.csv')
+        
     #Crearemos una función que permita navegar y seleccionar los destinos disponibles en el mapa.
     #Además, se presentará la información de lo que realiza cada botón para ayudar al usuario. 
     def navegarmapa(self,direcciones): 
@@ -21,7 +25,7 @@ class Parte3:
         #Creamos un ciclo que permitirá desplegar el menú 
         while estado==True:
             #Mostramos la interfaz del menú en el código. 
-            self.vista.menuPrin()
+            self.menuPrin()
             #Solicitamos le ingreso de una opción del menú
             opcion = input('Ingrese una opción del menu principal:  ')
 
@@ -31,12 +35,12 @@ class Parte3:
 
             elif opcion == '2':
                 #Ejecutamos la función que nos permite ingresar un destino. 
-                destinos()
+                self.destinos()
 
             elif opcion == '3':
                 #Ejecutamos las funcione que nos permiten obtener información acerca del 
-                información()
-                rutas_mas()
+                self.información()
+                self.estadisticas.rutas_mas()
 
             else:     
                 #Esta acción se ejecuta si el usuario ingresa una opción incorrecta, y se reinicia el programa.
@@ -48,9 +52,9 @@ class Parte3:
 
 
 
-    def menuPrin():#Esta funcion imprime la imagen de la pantalla de carga y al mismo tiempo lo imprime en
+    def menuPrin(self):#Esta funcion imprime la imagen de la pantalla de carga y al mismo tiempo lo imprime en
         #la consola
-        print(buscar())
+        self.interfaz.buscar()
         print("""
             ---------------------------------------------------------------------------
             -                                                                         -
@@ -74,7 +78,7 @@ class Parte3:
             ---------------------------------------------------------------------------
             """)
 
-    def buscar_destinos(destino): 
+    def buscar_destinos(self,destino): 
         #Esta función permite buscar el destino mediante una API. 
         lista_destinos = [] #Esta lista almacenará los destinos que el API devuelva
         #En esta linea busca en la api los datos que tiene sobre el detino y se guarda en una variable
@@ -96,27 +100,27 @@ class Parte3:
 
         return lista_destinos #Retornamos el listado de los destinos. 
 
-    def destinos():#Sirve para hacer la investigación del destino 
+    def destinos(self):#Sirve para hacer la investigación del destino 
     #Un Web API  hace una petición HTTP (generalmente desde algún lenguaje de programación) y este le retorna un dato de respuesta
 
         destino_deseado = input("-> Ingrese el destino al que desea ir: ")# se pide el destino al cual desea ir el usuario
-        destinos = buscar_destinos(destino_deseado)
-        destinados=list(rutas['rutas'])
+        destinos = self.buscar_destinos(destino_deseado)
+        destinados=list(self.rutas['rutas'])
         existe=False
         for i in destinados:
             if i == destino_deseado:
                 existe=True
         if existe ==True:
-            conteo= rutas[rutas['rutas']==destino_deseado]['conteo']
+            conteo= self.rutas[self.rutas['rutas']==destino_deseado]['conteo']
             conteo=conteo+1
-            rutas.loc[rutas['rutas']==destino_deseado, 'conteo']=conteo
+            self.rutas.loc[self.rutas['rutas']==destino_deseado, 'conteo']=conteo
         else:
             posicon=0
-            for i in (rutas.index):
+            for i in (self.rutas.index):
                 posicon=i
             posicon=posicon+1
-            rutas.loc[posicon]=[destino_deseado,1]
-        rutas.to_csv('rutas.csv',index=False) #guarda cada cosa que busque el usuario en un archivo .csv
+            self.rutas.loc[posicon]=[destino_deseado,1]
+        self.rutas.to_csv('rutas.csv',index=False) #guarda cada cosa que busque el usuario en un archivo .csv
         for i in range(len(destinos)):
             nombre_destino = destinos[i]["name"]
             distancia_destino = destinos[i]["lat"]
@@ -134,10 +138,10 @@ class Parte3:
 
         print(f" Su destino final desde su ubicación es : {nombre} - {distancia} kms - {tiempo} min" )    
 
-        empezarviaje () #Se llama a la funcion navegar por el mapa
+        self.parte4.empezarviaje () #Se llama a la funcion navegar por el mapa
 
 
-    def información():       
+    def información(self):       
         #Mostramos la interfaz del menú del código. 
         print("""
             -------------------------------------------------------------------------------------

@@ -1,9 +1,11 @@
 from tkinter import *
-from imagenes import *
+from Interfaz import Interfaz
 #Se inicia con la función final, para que de esta manera éste sea leído 
 #antes por el programa. Esto no servirá para que las variables de
 #finalizar sean leídas y reconocidas.
 class Parte4:
+    def __init__(self):
+        self.interfaz = Interfaz()
 
     def finalizar(self,elecciondeviaje):
         arribo = False
@@ -59,7 +61,7 @@ class Parte4:
     def empezarviaje (self): #parámetro recibido del módulo Parte3
         #Se utiliza Int para asegurar carácter numérico
         arribo = False
-        print(mapa_de_ruta())
+        self.interfaz.mapa_de_ruta()
         eleccionviaje=0
          #Se imprime la variable mapadestino según su valor adquirido previamente.
         fin=False
@@ -80,7 +82,7 @@ class Parte4:
             -                                                                   -
             ---------------------------------------------------------------------
                             ''')
-        eleccionviaje=int(self,eleccionviaje)
+        eleccionviaje = int(eleccionviaje)
 
         arribo = self.finalizar(eleccionviaje) #Se aplica la última función (la primera que fue mostrada),
         #cuyos valores ya fueron leídos por el programa. Su parámetro será el valor de la elección
