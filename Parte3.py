@@ -58,13 +58,11 @@ class Parte3:
         print("""
             ---------------------------------------------------------------------------
             -                                                                         -
-            -                                                                         -
-            -           _____                            __  __                       -
-            -          |_   _|  _ _   __ _   _ _    ___ |  \/  |  __ _   _ __         -
-            -            | |   | '_| / _` | | ' \  |_ / | |\/| | / _` | | '_ \        -
-            -            |_|   |_|   \__,_| |_||_| /__| |_|  |_| \__,_| | .__/        -
-            -                                                           |_|           -
-            -                                                                         -
+            -       _                        __  __                                   -
+            -      | |     ___   __ _   ___ |  \/  |  __ _   _ __                     -
+            -      | |__  / _ \ / _` | / _ \| |\/| | / _` | | '_ \                    -
+            -      |____| \___/ \__, | \___/|_|  |_| \__,_| | .__/                    -
+            -                   |___/                       |_|                       -
             -                                                                         -
             -                                                                         -
             -                                                                         -
@@ -123,8 +121,8 @@ class Parte3:
         self.rutas.to_csv('rutas.csv',index=False) #guarda cada cosa que busque el usuario en un archivo .csv
         for i in range(len(destinos)):
             nombre_destino = destinos[i]["name"]
-            distancia_destino = destinos[i]["lat"]
-            tiempo_destino =  float(destinos[i]["lat"]) * 8
+            distancia_destino = float(destinos[i]["lat"]) * 37
+            tiempo_destino =  float(destinos[i]["lat"]) * 15
 
 
             print(f"{i+1}) {nombre_destino} - {distancia_destino} kms    - {tiempo_destino} min ")# le da una lista de lugares con similitudes al nombre de la ciudad que eligio 
@@ -132,8 +130,8 @@ class Parte3:
 
         opcion = int(input(" -> Ingrese el numero del destino: "))
         nombre = destinos[opcion - 1]["name"]
-        distancia = destinos[opcion - 1]["lat"]
-        tiempo =  int(float(destinos[opcion - 1]["lat"]) * 8)
+        distancia = int(float(destinos[opcion - 1]["lat"]) *37)
+        tiempo =  int(float(destinos[opcion - 1]["lat"]) * 15)
 
 
         print(f" Su destino final desde su ubicación es : {nombre} - {distancia} kms - {tiempo} min" )    
@@ -146,12 +144,11 @@ class Parte3:
         print("""
             -------------------------------------------------------------------------------------
             -                                                                                   -
-            -                                                                                   -
-            -              _____                            __  __                              -
-            -             |_   _|  _ _   __ _   _ _    ___ |  \/  |  __ _   _ __                -
-            -               | |   | '_| / _` | | ' \  |_ / | |\/| | / _` | | '_ \               -
-            -               |_|   |_|   \__,_| |_||_| /__| |_|  |_| \__,_| | .__/               -
-            -                                                              |_|                  -
+            -       _                        __  __                                             -
+            -      | |     ___   __ _   ___ |  \/  |  __ _   _ __                               -
+            -      | |__  / _ \ / _` | / _ \| |\/| | / _` | | '_ \                              -
+            -      |____| \___/ \__, | \___/|_|  |_| \__,_| | .__/                              -
+            -                   |___/                       |_|                                 -
             -   _____________________                                                           -
             -  |Información:         |                                                          -
             -   ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯                                                           -
