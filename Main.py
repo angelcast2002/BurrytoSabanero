@@ -6,7 +6,6 @@ def main():
     vista = Vista()
     controlador = Controlador(vista)
     controlador.main()
- 
 
 
 if __name__ == '__main__':
